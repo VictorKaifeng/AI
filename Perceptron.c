@@ -45,17 +45,6 @@ int main(void)
         {
             des_x = 1;
         }
-        /* Codi que si que el fa, es una copia de perceptron
-        for (int j = 0; j < pow(10,5); j++)
-        {
-            s = dot(w,x) + (bias).data[0];
-            s = activation(s);
-            if(abs(s-des_x) <= 0.1 ){
-                break;
-            }
-            correction(&w,&bias,des_x,x); 
-        }*/
-        /* Codi que no el fa*/
          perceptron(&w,&bias,des_x,x);
 
     }
@@ -100,10 +89,10 @@ void perceptron ( vector* w , vector* bias, double des_x, vector x ){
 /* Si que actualitza w i bias*/
 void correction ( vector* w , vector* bias, double des_x, vector x){
     int i;
-    for ( i = 0; i < (*w).dim; i++){
+    for ( i = 0; i < w->dim; i++){
         (*w).data[i] += Delta_w((*w),des_x,x).data[i];
     }
-    for ( i = 0; i < (*bias).dim; i++){
+    for ( i = 0; i < bias->dim; i++){
        (*bias).data[i] += Delta_bias(*w,des_x,x).data[i];
     }
     return;
@@ -177,7 +166,6 @@ vector ReadvectorFile( char* name){
   vector C;
   fp = fopen(name,"r");
   if(fp== NULL) return C;
-  // LEE la dimension, modificar por scanf si el usuario la introduce manualmente
   fscanf(fp,"%d",&C.dim);
   C = StartVector(C.dim);
   for(i=0;i<C.dim;i++){
