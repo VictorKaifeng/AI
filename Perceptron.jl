@@ -36,7 +36,7 @@ function perceptron(w,θ, des_x, x)
 end
 
 function AI_main()
-    dat = readdlm("pesos_julia.txt", Float64)
+    dat = readdlm("weights_julia.txt", Float64)
     w = zeros(2)
     w[1] = dat[1]
     w[2] = dat[2]
@@ -58,14 +58,12 @@ function AI_main()
         (w,θ) = perceptron(w,θ,des_x,x)
     end
     y = zeros(2)
-    #println("Escoge dos numeros")
-    #num  = readline() 
+
     num= "3"
     y[1] = parse(Float64, num)
-    #num  = readline() 
     y[2] = parse(Float64, num)
     y = (0.3,0.5)
-    open("pesos_julia.txt","w") do io
+    open("weights_julia.txt","w") do io
         println(io,w[1])
         println(io,w[2])
         println(io,θ)
@@ -83,12 +81,7 @@ end
 function main()
 
     (w, θ, plt) = AI_main()
-    y = (1,-0.03)
-    if (dot(w,y)+θ>=0)
-        #println("Y mas grande que X") 
-    else
-        #println("X mas grande que Y") 
-    end
+
     return plt
 end
 
